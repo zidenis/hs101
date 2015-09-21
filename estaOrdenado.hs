@@ -1,26 +1,10 @@
-module EstaOrdenado where
+module Main where
 
-entrada =
-  [  "8",
-  "15 6 24 48 56 6 2 11",
-  "11",
-  "4 3 5",
-  "4 5 7",
-  "4 1 7",
-  "0 3 6",
-  "4 2 5",
-  "2 4 6",
-  "4 2 4",
-  "1 3 13",
-  "4 2 4",
-  "3 3",
-  "4 2 4"
-  ]
-
----
+import Data.Char
 
 main :: IO()
-main = 
+main = do
+    entrada <- fmap lines getContents :: IO [String]
     putStr $ exeComando (drop 3 (transfInput entrada)) ((transfInput entrada !! 1)) 
 
 -- Converte strings em inteiros
