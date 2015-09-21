@@ -1,19 +1,30 @@
 module Main where
 
 import Data.Char
+import System.Environment
 
 main :: IO()
 main = do
-    entrada <- fmap lines getContents :: IO [String]
-    putStr $ exeComando (drop 3 (transfInput entrada)) ((transfInput entrada !! 1)) 
+    args <- getArgs
+    ent <- readFile (args !! 0)
+    --ent <- readFile "entrada.txt"
+    let entrada = transfInput (lines ent)
+    putStr $ procComando entrada
 
--- Converte strings em inteiros
+-- Converte lista de strings em inteiros
 str2int :: [String] -> [Int]
 str2int = map read
 
 -- Converte a entrada
 transfInput :: [String] -> [[Int]]
 transfInput input = map str2int $ map words input
+
+procComando :: [[Int]] -> String
+procComando [] = ""
+procComando (_:sequencia:[numComandos]:xs) = exeComando (take numComandos xs) sequencia ++ procComando (drop numComandos xs)
+
+  --let sequencia = entrada !! 1
+  --let numComandos = head $ entrada !! 2
 
 exeComando :: [[Int]] -> [Int] -> String
 exeComando [[]] _ = ""
