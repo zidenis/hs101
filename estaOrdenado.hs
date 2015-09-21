@@ -1,6 +1,5 @@
 module Main where
 
-import Data.Char
 import System.Environment
 
 main :: IO()
@@ -63,6 +62,7 @@ subSeq :: Int -> Int -> [Int] -> [Int]
 subSeq x y sequencia = drop (x-1) $ take y sequencia
 
 verificaSubSeq :: [Int] -> String -> String
+verificaSubSeq [x] "" = "ALL EQUAL"
 verificaSubSeq [x] str = str
 verificaSubSeq (x:y:xs) str
     | (str == "") = verificaSubSeq (y:xs) (compara x y)
